@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "RXPQfrS7QZw=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\hp\\Desktop\\FullStack course\\Bach-End and ASP.Net\\app1\\KASHOP\\KASHOP.PL\\KASHOP.PL.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\hp\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.16\\microsoft.aspnetcore.openapi.9.0.16.nupkg.sha512",
+    "C:\\Users\\hp\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}
