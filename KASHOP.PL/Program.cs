@@ -1,5 +1,6 @@
 
 using KASHOP.DAL;
+using Microsoft.EntityFrameworkCore;
 
 namespace KASHOP.PL
 {
@@ -17,7 +18,10 @@ namespace KASHOP.PL
 
             var app = builder.Build();
 
-            Database db = new Database();
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                options.UseSqlServer("DefaultConnection");
+            });
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
