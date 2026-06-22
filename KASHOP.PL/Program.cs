@@ -1,5 +1,4 @@
-
-using KASHOP.DAL;
+using KASHOP.DAL.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace KASHOP.PL
@@ -14,14 +13,14 @@ namespace KASHOP.PL
 
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-            builder.Services.AddOpenApi();
-
-            var app = builder.Build();
+            builder.Services.AddOpenApi();           
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseSqlServer("DefaultConnection");
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
+
+            var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

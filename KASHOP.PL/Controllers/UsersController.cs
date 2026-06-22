@@ -1,4 +1,4 @@
-﻿using KASHOP.DAL;
+﻿using KASHOP.DAL.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
