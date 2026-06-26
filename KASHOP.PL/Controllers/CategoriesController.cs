@@ -1,7 +1,11 @@
 ﻿using KASHOP.DAL.Data;
+using KASHOP.DAL.Dto;
+using KASHOP.DAL.Models;
 using KASHOP.PL.Resources;
+using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 
 namespace KASHOP.PL.Controllers
@@ -22,22 +26,17 @@ namespace KASHOP.PL.Controllers
         [HttpGet("")]
         public IActionResult Index()
         {
-            //try
-            //{
-            //    if (_context.Database.CanConnect())
-            //    {
-            //        return Ok("Done");
-            //    }
-            //    else
-            //    {
-            //        return StatusCode(500, "Cannot connect to the database");
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    return StatusCode(500, $"An error occurred: {ex.Message}");
-            //}
-            return Ok(_localizer["Success"].Value);
+            var categories = _context.Categories.Include(c=>c.Translations).ToList();
+            var response = categories.Adapt<List<CategoryResponse>>();
+            return Ok(new { response });
+        }
+        [HttpPost("")]
+        public IActionResult Create(CategoryRequest request)
+        {
+            var category = request.Adapt<Category>();
+            _context.Add(category);
+            _context.SaveChanges();
+            return Ok();
         }
     }
 }

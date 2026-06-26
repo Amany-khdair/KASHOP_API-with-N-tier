@@ -167,3 +167,10 @@ C:\Users\hp\Desktop\FullStack course\Bach-End and ASP.Net\app1\KASHOP\KASHOP.PL\
 C:\Users\hp\Desktop\FullStack course\Bach-End and ASP.Net\app1\KASHOP\KASHOP.PL\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Users\hp\Desktop\FullStack course\Bach-End and ASP.Net\app1\KASHOP\KASHOP.PL\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Users\hp\Desktop\FullStack course\Bach-End and ASP.Net\app1\KASHOP\KASHOP.PL\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\hp\Desktop\FullStack course\Bach-End and ASP.Net\app1\KASHOP\KASHOP.PL\bin\Debug\net9.0\ar\KASHOP.PL.resources.dll
+C:\Users\hp\Desktop\FullStack course\Bach-End and ASP.Net\app1\KASHOP\KASHOP.PL\obj\Debug\net9.0\KASHOP.PL.Resources.SharedResource.resources
+C:\Users\hp\Desktop\FullStack course\Bach-End and ASP.Net\app1\KASHOP\KASHOP.PL\obj\Debug\net9.0\KASHOP.PL.Resources.SharedResource.ar.resources
+C:\Users\hp\Desktop\FullStack course\Bach-End and ASP.Net\app1\KASHOP\KASHOP.PL\obj\Debug\net9.0\KASHOP.PL.csproj.GenerateResource.cache
+C:\Users\hp\Desktop\FullStack course\Bach-End and ASP.Net\app1\KASHOP\KASHOP.PL\obj\Debug\net9.0\ar\KASHOP.PL.resources.dll
+C:\Users\hp\Desktop\FullStack course\Bach-End and ASP.Net\app1\KASHOP\KASHOP.PL\bin\Debug\net9.0\Mapster.dll
+C:\Users\hp\Desktop\FullStack course\Bach-End and ASP.Net\app1\KASHOP\KASHOP.PL\bin\Debug\net9.0\Mapster.Core.dll
