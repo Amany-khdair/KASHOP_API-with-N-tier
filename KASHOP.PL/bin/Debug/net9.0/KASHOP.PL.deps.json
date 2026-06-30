@@ -9,7 +9,6 @@
       "KASHOP.PL/1.0.0": {
         "dependencies": {
           "KASHOP.BLL": "1.0.0",
-          "Mapster": "7.4.0",
           "Microsoft.AspNetCore.OpenApi": "9.0.16",
           "Microsoft.EntityFrameworkCore.Design": "9.0.17"
         },
@@ -940,7 +939,8 @@
       },
       "KASHOP.BLL/1.0.0": {
         "dependencies": {
-          "KASHOP.DAL": "1.0.0"
+          "KASHOP.DAL": "1.0.0",
+          "Mapster": "7.4.0"
         },
         "runtime": {
           "KASHOP.BLL.dll": {
