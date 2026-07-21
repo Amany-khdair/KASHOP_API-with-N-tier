@@ -1,3 +1,4 @@
+using KASHOP.BLL.Common;
 using KASHOP.BLL.Services;
 using KASHOP.DAL.Data;
 using KASHOP.DAL.Models;
@@ -56,6 +57,7 @@ namespace KASHOP.PL
             builder.Services.AddScoped<ICategoryService, CategoryService>();
             builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
             builder.Services.AddScoped<ISeedData, RoleSeedData>();
+            builder.Services.AddTransient<IEmailSender, EmailSender>();
             //if theres more seed data classes, you can add them here
             //builder.Services.AddScoped<ISeedData, CategorySeedDataClass>();
 
