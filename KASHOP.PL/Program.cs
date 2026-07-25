@@ -49,7 +49,10 @@ namespace KASHOP.PL
                 options.RequestCultureProviders.Add(new AcceptLanguageHeaderRequestCultureProvider());
             });
 
-            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>(Options =>
+            {
+                Options.User.RequireUniqueEmail = true;
+            })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 

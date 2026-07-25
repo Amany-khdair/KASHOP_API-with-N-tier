@@ -8,7 +8,12 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "email",
+        "Name": "UserId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Token",
         "Type": "System.String",
         "IsRequired": false
       }
