@@ -3,9 +3,13 @@ using KASHOP.DAL.Dto;
 using KASHOP.DAL.Models;
 using Mapster;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,11 +19,13 @@ namespace KASHOP.BLL.Services
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmailSender _emailSender;
+        private readonly IConfiguration _config;
 
-        public AuthenticationService(UserManager<ApplicationUser> userManager, IEmailSender emailSender)
+        public AuthenticationService(UserManager<ApplicationUser> userManager, IEmailSender emailSender, IConfiguration config)
         {
             _userManager = userManager;
             _emailSender = emailSender;
+            _config = config;
         }        
 
         public async Task<RegisterResponse> RegisterAsync(RegisterRequest request) 
@@ -131,11 +137,38 @@ namespace KASHOP.BLL.Services
                     Message = "Invalid password"
                 };
             }
-            
+
             return new LoginResponse()
             {
-                Message = "Login successful"
+                Message = "Login successful",
+                AccessToken = await GenerateJwt(user)
             };
+        }
+        private async Task<string> GenerateJwt(ApplicationUser user)
+        {
+            var roles = await _userManager.GetRolesAsync(user);
+            var userClaims = new List<Claim>()
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Role, string.Join(",",roles))
+            };
+            var securitykey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["ApiSettings:SecretKey"]));
+            
+            var creds = new SigningCredentials(securitykey, SecurityAlgorithms.HmacSha256);
+            
+            var token = new JwtSecurityToken(
+                issuer: _config["ApiSettings:issuer"],
+                audience: _config["ApiSettings:audience"],
+                claims: userClaims,
+                expires: DateTime.Now.AddDays(20),
+                signingCredentials: creds
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+
+
         }
     }
 }
