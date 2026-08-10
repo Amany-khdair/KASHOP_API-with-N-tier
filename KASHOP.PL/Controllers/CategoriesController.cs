@@ -37,6 +37,7 @@ namespace KASHOP.PL.Controllers
         [HttpPost("")]
         public async Task<IActionResult> Create(CategoryRequest request)
         {
+            //var user = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var response = await _categoryService.CreateCategory(request);
             return Ok();
         }
