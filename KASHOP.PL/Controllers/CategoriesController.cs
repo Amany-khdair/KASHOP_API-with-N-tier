@@ -31,9 +31,11 @@ namespace KASHOP.PL.Controllers
         [HttpGet("")]
         public async Task< IActionResult> Index()
         {
+            //var lang = Request.Headers["Accept-Language"].ToString();
             var categories = await _categoryService.GetAllCategories();            
             return Ok(new { _localizer["success"].Value, categories });
         }
+
         [HttpPost("")]
         public async Task<IActionResult> Create(CategoryRequest request)
         {

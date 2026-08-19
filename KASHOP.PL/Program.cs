@@ -1,4 +1,5 @@
 using KASHOP.BLL.Common;
+using KASHOP.BLL.Mapping;
 using KASHOP.BLL.Services;
 using KASHOP.DAL.Data;
 using KASHOP.DAL.Models;
@@ -27,6 +28,7 @@ namespace KASHOP.PL
 
             var app = builder.Build();
             app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
+            MapsterConfig.MapsterConfigRegister();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
