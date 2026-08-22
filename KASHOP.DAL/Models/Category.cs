@@ -9,5 +9,6 @@ namespace KASHOP.DAL.Models
     public class Category : AuditableEntity
     {
         public List<CategoryTranslation> Translations { get; set; }
+        public List<Product> Products { get; set; }
     }
 }
