@@ -1,5 +1,4 @@
 ﻿using KASHOP.DAL.Dto;
-using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace KASHOP.BLL.Services
 {
-    public interface IFileService
+    public interface IProductService
     {
-        Task<Result<string>> UploadAsync(IFormFile file);
+        Task<Result<ProductResponse>> CreateProduct(ProductRequest request);
     }
 }

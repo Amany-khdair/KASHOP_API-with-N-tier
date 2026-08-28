@@ -15,7 +15,10 @@ namespace KASHOP.PL.Extensions
             //builder.Services.AddScoped<ISeedData, CategorySeedDataClass>();
 
             Services.AddScoped<ICategoryRepository, CategoryRepository>();
+            Services.AddScoped<IProductRepository, ProductRepository>();
             Services.AddScoped<ICategoryService, CategoryService>();
+            Services.AddScoped<IProductService, ProductService>();
+            Services.AddScoped<IFileService, FileService>();
             Services.AddScoped<IAuthenticationService, AuthenticationService>();
             Services.AddScoped<ISeedData, RoleSeedData>();
             Services.AddTransient<IEmailSender, EmailSender>();
