@@ -181,3 +181,4 @@ C:\Users\hp\Desktop\FullStack course\Bach-End and ASP.Net\app1\KASHOP\KASHOP.PL\
 C:\Users\hp\Desktop\FullStack course\Bach-End and ASP.Net\app1\KASHOP\KASHOP.PL\bin\Debug\net9.0\Microsoft.Extensions.Identity.Stores.dll
 C:\Users\hp\Desktop\FullStack course\Bach-End and ASP.Net\app1\KASHOP\KASHOP.PL\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\hp\Desktop\FullStack course\Bach-End and ASP.Net\app1\KASHOP\KASHOP.PL\bin\Debug\net9.0\Microsoft.Bcl.Cryptography.dll
+C:\Users\hp\Desktop\FullStack course\Bach-End and ASP.Net\app1\KASHOP\KASHOP.PL\bin\Debug\net9.0\KASHOP.PL.staticwebassets.runtime.json

@@ -14,6 +14,7 @@ namespace KASHOP.PL.Extensions
             //if theres more seed data classes, you can add them here
             //builder.Services.AddScoped<ISeedData, CategorySeedDataClass>();
 
+            Services.AddExceptionHandler<GlobalExceptionHandler>();
             Services.AddScoped<ICategoryRepository, CategoryRepository>();
             Services.AddScoped<IProductRepository, ProductRepository>();
             Services.AddScoped<ICategoryService, CategoryService>();
@@ -22,7 +23,8 @@ namespace KASHOP.PL.Extensions
             Services.AddScoped<IAuthenticationService, AuthenticationService>();
             Services.AddScoped<ISeedData, RoleSeedData>();
             Services.AddTransient<IEmailSender, EmailSender>();
-            
+
+            Services.AddProblemDetails();
             return Services;
         }
     }

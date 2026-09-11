@@ -22,149 +22,106 @@ namespace KASHOP.BLL.Services
         }  
         public async Task<Result<List<CategoryResponse>>> GetAllCategories()
         {
-            try
-            {
-                var categories = await _categoryRepository.GetAllAsync(
-                new string[] {nameof(Category.Translations), "CreatedBy"}
-                );
-                return new Result<List<CategoryResponse>>
-                {
-                    Success = true,
-                    Message = "Categories retrieved successfully.",
-                    Data = categories.Adapt<List<CategoryResponse>>()
-                };
-            }
-            catch (Exception ex)
-            {
-                return new Result<List<CategoryResponse>>
-                {
-                    Success = false,
-                    Message = $"An error occurred while retrieving categories: {ex.InnerException.Message}",
-                };
-            }                      
+           
+            var categories = await _categoryRepository.GetAllAsync(
+            new string[] {nameof(Category.Translations), "CreatedBy"}
+            );
+            return Result<List<CategoryResponse>>.Ok(categories.Adapt<List<CategoryResponse>>(), "Categories retrieved successfully");
+            //return new Result<List<CategoryResponse>>
+            //{
+            //    Success = true,
+            //    Message = "Categories retrieved successfully.",
+            //    Data = categories.Adapt<List<CategoryResponse>>()
+            //};                                 
         }
         
         public async Task<Result<CategoryResponse>> GetCategory(Expression<Func<Category, bool>> filter)
         {
-            try
-            {
-                var category = await _categoryRepository.GetOne(filter, new string[] {nameof(Category.Translations), "CreatedBy" });
             
-                if (category is null)
-                {
-                    return new Result<CategoryResponse>
-                    {
-                        Success = false,
-                        Message = "Category not found."
-                    };
-                }
-                return new Result<CategoryResponse>
-                {
-                    Success = true,
-                    Message = "Category retrieved successfully.",
-                    Data = category.Adapt<CategoryResponse>()
-                };
-            }
-            catch(Exception ex)
-            {
-                return new Result<CategoryResponse>
-                {
-                    Success = false,
-                    Message = $"An error occurred while retrieving category: {ex.InnerException.Message}",
-                };
-            }
+            var category = await _categoryRepository.GetOne(filter, new string[] {nameof(Category.Translations), "CreatedBy" });
             
+            if (category is null)
+            {
+                return Result<CategoryResponse>.Fail("Category not found");
+                //return new Result<CategoryResponse>
+                //{
+                //    Success = false,
+                //    Message = "Category not found."
+                //};
+            }
+            return Result<CategoryResponse>.Ok(category.Adapt<CategoryResponse>(), "Category retrieved successfully");
+            //return new Result<CategoryResponse>
+            //{
+            //    Success = true,
+            //    Message = "Category retrieved successfully.",
+            //    Data = category.Adapt<CategoryResponse>()
+            //};
+                        
         }
 
         public async Task<Result<CategoryResponse>> CreateCategory(CategoryRequest request)
-        {
-            try
-            {
-                var category = request.Adapt<Category>();
-                await _categoryRepository.CreateAsync(category);
-                return new Result<CategoryResponse>
-                {
-                    Success = true,
-                    Message = "Category created successfully.",
-                };
-            }
-            catch(Exception ex)
-            {
-                return new Result<CategoryResponse>
-                {
-                    Success = false,
-                    Message = $"An error occurred while creating category: {ex.InnerException.Message}",
-                };                
-            }
+        {            
+            var category = request.Adapt<Category>();
+            await _categoryRepository.CreateAsync(category);
+            return Result<CategoryResponse>.Ok(category.Adapt<CategoryResponse>(), "Category created successfully.");
+            //return new Result<CategoryResponse>
+            //{
+            //    Success = true,
+            //    Message = "Category created successfully.",
+            //};            
             
         }
         public async Task<Result<bool>> DeleteCategory(int id)
         {
-            try
-            {
-                var category = await _categoryRepository.GetOne(c => c.Id == id);
-                if (category == null) 
-                    return new Result<bool>
-                    {
-                        Success = false,
-                        Message = "Category not found.",
-                        Data = false
-                    };
-                var deleted = await _categoryRepository.DeleteAsync(category);
-                return new Result<bool>
-                {
-                    Success = deleted,
-                    Message = deleted ? "Category deleted successfully." : "Failed to delete category.",
-                    Data = deleted
-                };
-            }
-            catch(Exception ex)
-            {
-                return new Result<bool>
-                {
-                    Success = false,
-                    Message = $"An error occurred while deleting category: {ex.InnerException.Message}",
-                    Data = false
-                };                
-            }
+        
+            var category = await _categoryRepository.GetOne(c => c.Id == id);
+            if (category == null) 
+                return Result<bool>.Fail("Category not found.");
+            //return new Result<bool>
+            //    {
+            //        Success = false,
+            //        Message = "Category not found.",
+            //        Data = false
+            //    };
+            var deleted = await _categoryRepository.DeleteAsync(category);
+            return Result<bool>.Ok(deleted, deleted ? "Category deleted successfully." : "Failed to delete category.");
+            //return new Result<bool>
+            //{
+            //    Success = deleted,
+            //    Message = deleted ? "Category deleted successfully." : "Failed to delete category.",
+            //    Data = deleted
+            //};           
             
         }
 
         public async Task<Result<CategoryResponse>> UpdateCategory(int id, CategoryRequest request)
         {
-            try
-            {
-                var category = await _categoryRepository.GetOne(c => c.Id == id, new string[] { nameof(Category.Translations), "CreatedBy" });
-                if (category == null)
-                    return new Result<CategoryResponse>
-                    {
-                        Success = false,
-                        Message = "Category not found."
-                    };
-                category = request.Adapt(category);
-                var result = await _categoryRepository.UpdateAsync(category);
-                if (result == null)
-                    return new Result<CategoryResponse>
-                    {
-                        Success = false,
-                        Message = "Failed to update category."
-                    };
-                return new Result<CategoryResponse>
-                {
-                    Success = true,
-                    Message = "Category updated successfully.",
-                    Data = result.Adapt<CategoryResponse>()
-                };
-            }
-            catch (Exception ex)
-            {
-                return new Result<CategoryResponse>
-                {
-                    Success = false,
-                    Message = $"An error occurred while updating category: {ex.InnerException.Message}",
-                };
-
-            }
+            
+            var category = await _categoryRepository.GetOne(c => c.Id == id, new string[] { nameof(Category.Translations), "CreatedBy" });
+            if (category == null)
+                return Result<CategoryResponse>.Fail("Category not found");
+            //return new Result<CategoryResponse>
+            //    {
+            //        Success = false,
+            //        Message = "Category not found."
+            //    };
+            category = request.Adapt(category);
+            var result = await _categoryRepository.UpdateAsync(category);
+            if (result == null)
+                return Result<CategoryResponse>.Fail("Failed to update category.");
+            //return new Result<CategoryResponse>
+            //    {
+            //        Success = false,
+            //        Message = "Failed to update category."
+            //    };
+            return Result<CategoryResponse>.Ok(result.Adapt<CategoryResponse>(), "Category updated successfully.");
+            //return new Result<CategoryResponse>
+            //{
+            //    Success = true,
+            //    Message = "Category updated successfully.",
+            //    Data = result.Adapt<CategoryResponse>()
+            //};
+            
         }
     }
 }

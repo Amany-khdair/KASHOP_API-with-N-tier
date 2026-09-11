@@ -38,7 +38,7 @@ namespace KASHOP.DAL.Repository
             return await query.ToListAsync();
         }
 
-        public async Task<T> GetOne(Expression<Func<T,bool>> filter, string[]? includes = null)
+        public async Task<T>? GetOne(Expression<Func<T,bool>> filter, string[]? includes = null)
         {
             IQueryable<T> query = _context.Set<T>();
             if(includes != null)
