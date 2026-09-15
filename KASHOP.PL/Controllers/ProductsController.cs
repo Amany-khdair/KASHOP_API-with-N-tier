@@ -35,6 +35,13 @@ namespace KASHOP.PL.Controllers
             var result = await _productService.GetProduct(p => p.Id == id);
             return result.Success ? Ok(result) : BadRequest(result);
         }
+        [HttpDelete("{id}")]
+        [Authorize]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _productService.DeleteProduct(id);
+            return result.Success? Ok(result) : BadRequest(result);
+        }
 
     }
 }

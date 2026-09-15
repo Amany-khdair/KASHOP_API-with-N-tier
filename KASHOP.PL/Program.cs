@@ -38,7 +38,7 @@ namespace KASHOP.PL
             }
 
             //we use this to serve static files like images, css, js etc. from wwwroot folder
-            app.UseStaticFiles();
+            //app.UseStaticFiles();
             app.UseHttpsRedirection();
             app.UseAuthorization();
 

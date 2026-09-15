@@ -22,8 +22,7 @@ namespace KASHOP.BLL.Mapping
                 .Map(dest => dest.Name, src => src.Translations.Where(t => t.Language == CultureInfo.CurrentUICulture.Name)
                 .Select(t => t.Name).FirstOrDefault())
                 .Map(dest => dest.Description, src => src.Translations.Where(t => t.Language == CultureInfo.CurrentUICulture.Name)
-                .Select(t => t.Description).FirstOrDefault())
-                .Map(dest => dest.MainImage, src => $"/images/{src.MainImage}");
+                .Select(t => t.Description).FirstOrDefault());
         }
     }
 }

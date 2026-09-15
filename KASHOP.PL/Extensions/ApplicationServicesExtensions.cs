@@ -14,9 +14,8 @@ namespace KASHOP.PL.Extensions
             //if theres more seed data classes, you can add them here
             //builder.Services.AddScoped<ISeedData, CategorySeedDataClass>();
 
+            Services.AddScoped<IUnitOfWork, UnitOfWork>();
             Services.AddExceptionHandler<GlobalExceptionHandler>();
-            Services.AddScoped<ICategoryRepository, CategoryRepository>();
-            Services.AddScoped<IProductRepository, ProductRepository>();
             Services.AddScoped<ICategoryService, CategoryService>();
             Services.AddScoped<IProductService, ProductService>();
             Services.AddScoped<IFileService, FileService>();

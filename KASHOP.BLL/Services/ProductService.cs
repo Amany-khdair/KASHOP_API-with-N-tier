@@ -13,12 +13,12 @@ namespace KASHOP.BLL.Services
 {
     public class ProductService : IProductService
     {
-        private readonly IProductRepository _productRepository;
         private readonly IFileService _fileService;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ProductService(IProductRepository productRepository, IFileService fileService)
+        public ProductService(IUnitOfWork unitOfWork, IFileService fileService)
         {
-            _productRepository = productRepository;
+            _unitOfWork = unitOfWork;
             _fileService = fileService;
         }
         public async Task<Result<ProductResponse>> CreateProduct(ProductRequest request)
@@ -35,16 +35,17 @@ namespace KASHOP.BLL.Services
             }
 
             var product = request.Adapt<Product>();
-            product.MainImage = uploadResult.Data;
-            await _productRepository.CreateAsync(product);
-
+            product.MainImage = uploadResult.Data.Url;
+            product.MainImagePublicId = uploadResult.Data.PublicId;
+            await _unitOfWork.ProductRepository.CreateAsync(product);
+            await _unitOfWork.CompleteAsync();
             return Result<ProductResponse>.Ok(product.Adapt<ProductResponse>(), "Product created successfully");                
                                  
-        }
+        }       
 
         public async Task<Result<List<ProductResponse>>> GetAllProducts()
         {           
-            var products = await _productRepository.GetAllAsync(
+            var products = await _unitOfWork.ProductRepository.GetAllAsync(
                 new string[] { nameof(Product.Translations), nameof(Product.Category) });
 
             return Result<List<ProductResponse>>.Ok(products.Adapt<List<ProductResponse>>(), "Products retrieved successfully");                           
@@ -52,7 +53,7 @@ namespace KASHOP.BLL.Services
 
         public async Task<Result<ProductResponse>> GetProduct(Expression<Func<Product, bool>> filter)
         {            
-            var product = await _productRepository.GetOne(filter, 
+            var product = await _unitOfWork.ProductRepository.GetOne(filter, 
                 new string[] { nameof(Product.Translations), nameof(Product.Category) });
             if (product is null)
             {
@@ -60,6 +61,27 @@ namespace KASHOP.BLL.Services
             }
 
             return Result<ProductResponse>.Ok(product.Adapt<ProductResponse>(), "Product retrieved successfully");                          
+        }
+
+        public async Task<Result<bool>> DeleteProduct(int id)
+        {
+            var product = await _unitOfWork.ProductRepository.GetOne(p => p.Id == id);
+            if (product is null)
+            {
+                return Result<bool>.Fail("Product not found");
+            }
+
+            var deletedImageResult = await _fileService.Delete(product.MainImagePublicId);
+            if(!deletedImageResult.Success)
+            {
+                return Result<bool>.Fail($"Failed to delete product image: {deletedImageResult.Message}");
+            }
+
+            _unitOfWork.ProductRepository.Delete(product);
+            var affectedRows = await _unitOfWork.CompleteAsync();
+            return affectedRows > 0
+                ? Result<bool>.Ok(true, "Product deleted successfully")
+                : Result<bool>.Fail("Failed to delete product");
         }
     }
 }
