@@ -24,7 +24,7 @@ namespace KASHOP.DAL.Repository
             return entity;
         }
 
-        public async Task<List<T>> GetAllAsync(string[] includes)
+        public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>> ? filter = null, string[]? includes = null)
         {
             IQueryable<T> query = _context.Set<T>();
             if (includes != null)
@@ -33,6 +33,10 @@ namespace KASHOP.DAL.Repository
                 {
                     query = query.Include(include);
                 }
+            }
+            if (filter is not null)
+            {
+                query = query.Where(filter);
             }
             return await query.ToListAsync();
         }

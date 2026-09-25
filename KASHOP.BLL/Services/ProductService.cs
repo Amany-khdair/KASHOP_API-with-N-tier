@@ -46,7 +46,7 @@ namespace KASHOP.BLL.Services
         public async Task<Result<List<ProductResponse>>> GetAllProducts()
         {           
             var products = await _unitOfWork.ProductRepository.GetAllAsync(
-                new string[] { nameof(Product.Translations), nameof(Product.Category) });
+                includes: new string[] { nameof(Product.Translations), nameof(Product.Category) });
 
             return Result<List<ProductResponse>>.Ok(products.Adapt<List<ProductResponse>>(), "Products retrieved successfully");                           
         }

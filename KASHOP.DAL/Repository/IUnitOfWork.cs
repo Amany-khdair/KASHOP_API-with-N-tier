@@ -10,6 +10,7 @@ namespace KASHOP.DAL.Repository
     {
         ICategoryRepository CategoryRepository { get; }
         IProductRepository ProductRepository { get; }
+        ICartRepository CartRepository { get; }
         Task<int> CompleteAsync();
     }
 }

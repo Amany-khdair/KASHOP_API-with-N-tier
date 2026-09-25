@@ -18,6 +18,7 @@ namespace KASHOP.PL.Extensions
             Services.AddExceptionHandler<GlobalExceptionHandler>();
             Services.AddScoped<ICategoryService, CategoryService>();
             Services.AddScoped<IProductService, ProductService>();
+            Services.AddScoped<ICartService, CartService>();
             Services.AddScoped<IFileService, FileService>();
             Services.AddScoped<IAuthenticationService, AuthenticationService>();
             Services.AddScoped<ISeedData, RoleSeedData>();

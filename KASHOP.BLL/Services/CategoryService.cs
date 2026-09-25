@@ -24,7 +24,7 @@ namespace KASHOP.BLL.Services
         {
            
             var categories = await _unitOfWork.CategoryRepository.GetAllAsync(
-            new string[] {nameof(Category.Translations), "CreatedBy"}
+            includes: new string[] {nameof(Category.Translations), "CreatedBy"}
             );
             return Result<List<CategoryResponse>>.Ok(categories.Adapt<List<CategoryResponse>>(), "Categories retrieved successfully");
             //return new Result<List<CategoryResponse>>
