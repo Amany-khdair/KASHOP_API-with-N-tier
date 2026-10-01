@@ -29,6 +29,10 @@ namespace KASHOP.BLL.Mapping
                 .Select(t => t.Name).FirstOrDefault())
                 .Map(dest => dest.Price, src => src.Product.Price)
                 .Map(dest => dest.MainImage, src => src.Product.MainImage);
+
+            TypeAdapterConfig<OrderItem, OrderItemResponse>.NewConfig()
+                .Map(dest => dest.ProductName, src => src.Product.Translations.Where(t => t.Language == CultureInfo.CurrentUICulture.Name)
+                .Select(t => t.Name).FirstOrDefault()); 
         }
     }
 }
