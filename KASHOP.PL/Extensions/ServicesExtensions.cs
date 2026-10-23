@@ -13,7 +13,7 @@ namespace KASHOP.PL.Extensions
             Services.AddIdentityServices();
             Services.AddJwtAuthenticationServices(Configuration);
             Services.AddLocalizationServices();
-            Services.AddApplicationServices();
+            Services.AddBusinessServices(Configuration);
 
             return Services;
         }

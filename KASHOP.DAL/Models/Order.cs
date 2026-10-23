@@ -23,5 +23,9 @@ namespace KASHOP.DAL.Models
         public string Street { get; set; }
         public string PhoneNumber { get; set; }
         public List<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
+
+        public string? StripeSessionId { get; set; }
+        public string? PaymentIntentId { get; set; }
+        public DateTime? PaidAt { get; set; }
     }
 }

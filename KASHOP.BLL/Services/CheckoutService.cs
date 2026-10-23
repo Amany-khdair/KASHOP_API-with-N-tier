@@ -3,11 +3,7 @@ using KASHOP.DAL.Models;
 using KASHOP.DAL.Repository;
 using Mapster;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Stripe.Checkout;
 
 namespace KASHOP.BLL.Services
 {
@@ -76,11 +72,55 @@ namespace KASHOP.BLL.Services
                 totalAmount += OrderItem.PriceAtPurchase * OrderItem.Count;
             }
             order.TotalAmount = totalAmount;
+            
+
+            return request.PaymentMethod == DAL.Enums.PaymentMethodEnum.Cash ? 
+                await PlaceCashOrderAsync(order, cartItems) 
+                :
+                await PlaceVisaOrderAsync(order, cartItems);
+        }
+
+        private async Task<Result<OrderResponse>> PlaceVisaOrderAsync(Order order, List<CartItem> cartItems)
+        {
+            var options = new SessionCreateOptions
+            {
+                Mode = "payment",
+                LineItems = cartItems.Select(item => new SessionLineItemOptions
+                {
+                    Quantity = item.Count,
+                    PriceData = new SessionLineItemPriceDataOptions
+                    {
+                        Currency = "USD",
+                        ProductData = new SessionLineItemPriceDataProductDataOptions
+                        {
+                            Name = item.Product.Translations.FirstOrDefault(t => t.Language == "en")?.Name,
+                            Description = item.Product.Translations.FirstOrDefault(t => t.Language == "en")?.Description
+                        },                    
+                        UnitAmount = (long)item.Product.Price * 100, // Stripe expects the amount in cents
+                    },
+                }).ToList(),
+                SuccessUrl = "https://localhost:7214/checkout/success?session_id={CHECKOUT_SESSION_ID}",
+                //CancelUrl = "https://localhost:7214/checkout/cancel",
+            }; 
+            var service = new SessionService();
+            var session = service.Create(options);
+            order.StripeSessionId = session.Id;
             await _unitOfWork.OrderRepository.CreateAsync(order);
+            await _unitOfWork.CompleteAsync();
+
+            var response = order.Adapt<OrderResponse>();
+            response.PaymentUrl = session.Url;
+            return Result<OrderResponse>.Ok(response, "Redirect to payment page");
+        }
+
+        private async Task<Result<OrderResponse>> PlaceCashOrderAsync(Order order, List<CartItem> cartItems)
+        {
             foreach(var item in cartItems)
             {
+                item.Product.Quantity -= item.Count;
                 _unitOfWork.CartRepository.Delete(item);
             }
+            await _unitOfWork.OrderRepository.CreateAsync(order);
             await _unitOfWork.CompleteAsync();
             return Result<OrderResponse>.Ok(order.Adapt<OrderResponse>(), "Order placed successfully");
         }

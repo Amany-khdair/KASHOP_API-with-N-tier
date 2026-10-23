@@ -198,6 +198,12 @@ namespace KASHOP.DAL.Migrations
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("PaidAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PaymentIntentId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("PaymentMethod")
                         .HasColumnType("int");
 
@@ -216,6 +222,9 @@ namespace KASHOP.DAL.Migrations
 
                     b.Property<string>("Street")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StripeSessionId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal?>("TotalAmount")

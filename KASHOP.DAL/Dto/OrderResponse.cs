@@ -20,5 +20,7 @@ namespace KASHOP.DAL.Dto
         public string Street { get; set; }
         public string PhoneNumber { get; set; }
         public List<OrderItemResponse> OrderItems { get; set; } 
+
+        public string? PaymentUrl { get; set; }
     }
 }
