@@ -2,6 +2,7 @@
 using KASHOP.DAL.Models;
 using KASHOP.DAL.Repository;
 using Mapster;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Stripe.Checkout;
 
@@ -11,10 +12,13 @@ namespace KASHOP.BLL.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly UserManager<ApplicationUser> _userManager;
-        public CheckoutService(IUnitOfWork unitOfWork, UserManager<ApplicationUser> userManager)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public CheckoutService(IUnitOfWork unitOfWork, UserManager<ApplicationUser> userManager, IHttpContextAccessor httpContextAccessor)
         {
             _unitOfWork = unitOfWork;
             _userManager = userManager;
+            _httpContextAccessor = httpContextAccessor;
         }
         public async Task<Result<OrderResponse>> CheckOut(string userId, CheckoutRequest request)
         {
@@ -79,9 +83,64 @@ namespace KASHOP.BLL.Services
                 :
                 await PlaceVisaOrderAsync(order, cartItems);
         }
+        public async Task<Result<OrderResponse>> HandleSuccess(string sessionId)
+        {
+            var order = await _unitOfWork.OrderRepository.GetOne(
+                filter: o => o.StripeSessionId == sessionId,
+                includes: new[]
+                {
+                    $"{nameof(Order.OrderItems)}.{nameof(OrderItem.Product)}",
+                    $"{nameof(Order.OrderItems)}.{nameof(OrderItem.Product)}.{nameof(Product.Translations)}"
+                });
+            if(order.PaymentStatus == DAL.Enums.PaymentStatusEnum.Paid)
+            {
+                return Result<OrderResponse>.Fail("Order already paid");
+            }
+            var session = await new SessionService().GetAsync(sessionId);
+            if(session.PaymentStatus != "paid")
+            {
+                return Result<OrderResponse>.Fail("Payment not completed");
+            }
+            order.PaymentStatus = DAL.Enums.PaymentStatusEnum.Paid;
+            order.Status = DAL.Enums.OrderStatusEnum.Confirmed;
+            order.AmountPaid = session.AmountTotal;
+            order.PaidAt = DateTime.UtcNow;
+            order.PaymentIntentId = session.PaymentIntentId;
 
+            foreach (var item in order.OrderItems)
+            {
+                item.Product.Quantity -= item.Count;
+            }
+
+            var cartItems = await _unitOfWork.CartRepository.GetAllAsync(
+                filter: c => c.UserId == order.UserId
+                );
+
+            foreach (var item in cartItems)
+            {
+                _unitOfWork.CartRepository.Delete(item);
+            }
+
+            await _unitOfWork.CompleteAsync();
+
+            foreach (var item in order.OrderItems)
+            {
+                var product = item.Product;
+
+                var translations = product?.Translations;
+
+                var test = item.Adapt<OrderItemResponse>();
+            }
+
+            return Result<OrderResponse>.Ok(order.Adapt<OrderResponse>(), "Payment successful and order confirmed");
+
+
+        }
         private async Task<Result<OrderResponse>> PlaceVisaOrderAsync(Order order, List<CartItem> cartItems)
         {
+            var request = _httpContextAccessor.HttpContext.Request;
+            var baseUrl = $"{request.Scheme}://{request.Host}";
+
             var options = new SessionCreateOptions
             {
                 Mode = "payment",
@@ -99,8 +158,9 @@ namespace KASHOP.BLL.Services
                         UnitAmount = (long)item.Product.Price * 100, // Stripe expects the amount in cents
                     },
                 }).ToList(),
-                SuccessUrl = "https://localhost:7214/checkout/success?session_id={CHECKOUT_SESSION_ID}",
-                //CancelUrl = "https://localhost:7214/checkout/cancel",
+                SuccessUrl = $"{baseUrl}/api/orders/payment/success?sessionId={{CHECKOUT_SESSION_ID}}",
+                ExpiresAt = DateTime.UtcNow.AddHours(1)
+                //CancelUrl = $"{baseUrl}/checkout/cancel",
             }; 
             var service = new SessionService();
             var session = service.Create(options);
@@ -124,5 +184,7 @@ namespace KASHOP.BLL.Services
             await _unitOfWork.CompleteAsync();
             return Result<OrderResponse>.Ok(order.Adapt<OrderResponse>(), "Order placed successfully");
         }
+
+        
     }
 }

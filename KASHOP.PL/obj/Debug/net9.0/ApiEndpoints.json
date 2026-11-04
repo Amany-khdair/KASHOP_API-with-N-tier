@@ -221,6 +221,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "KASHOP.PL.Controllers.OrdersController",
+    "Method": "PaymentSuccess",
+    "RelativePath": "api/Orders/payment/success",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "sessionId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "KASHOP.PL.Controllers.ProductsController",
     "Method": "CreateProduct",
     "RelativePath": "api/Products",
