@@ -26,6 +26,7 @@ namespace KASHOP.PL.Extensions
             Services.AddScoped<IAuthenticationService, AuthenticationService>();
             Services.AddScoped<ISeedData, RoleSeedData>();
             Services.AddTransient<IEmailSender, EmailSender>();
+            Services.AddScoped<IOrderService, BLL.Services.OrderService>();
 
             Services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
             StripeConfiguration.ApiKey = Configuration["Stripe:Secretkey"];

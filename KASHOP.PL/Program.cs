@@ -14,6 +14,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Globalization;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace KASHOP.PL
 {
@@ -25,6 +26,11 @@ namespace KASHOP.PL
 
             // Add services to the container.
             builder.Services.AddApplicationServices(builder.Configuration);
+
+            builder.Services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            });
 
             var app = builder.Build();
             app.UseExceptionHandler();

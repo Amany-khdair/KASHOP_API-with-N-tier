@@ -32,7 +32,10 @@ namespace KASHOP.BLL.Mapping
 
             TypeAdapterConfig<OrderItem, OrderItemResponse>.NewConfig()
                 .Map(dest => dest.ProductName, src => src.Product.Translations.Where(t => t.Language == CultureInfo.CurrentUICulture.Name)
-                .Select(t => t.Name).FirstOrDefault()); 
+                .Select(t => t.Name).FirstOrDefault());
+
+            TypeAdapterConfig<Order, OrderSummaryResponse>.NewConfig()
+                .Map(dest => dest.ItemsCount, src => src.OrderItems.Sum(item => item.Count));
         }
     }
 }

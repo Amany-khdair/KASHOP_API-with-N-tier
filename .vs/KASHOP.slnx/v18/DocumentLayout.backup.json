@@ -1,0 +1,134 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\hp\\Desktop\\FullStack course\\Bach-End and ASP.Net\\app1\\KASHOP\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{ED7DDF75-51AC-5284-1654-F1949D16CBB2}|KASHOP.PL\\KASHOP.PL.csproj|c:\\users\\hp\\desktop\\fullstack course\\bach-end and asp.net\\app1\\kashop\\kashop.pl\\controllers\\orderscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED7DDF75-51AC-5284-1654-F1949D16CBB2}|KASHOP.PL\\KASHOP.PL.csproj|solutionrelative:kashop.pl\\controllers\\orderscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9162A00A-22A6-44FC-168C-A902B563F5EE}|KASHOP.BLL\\KASHOP.BLL.csproj|c:\\users\\hp\\desktop\\fullstack course\\bach-end and asp.net\\app1\\kashop\\kashop.bll\\services\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9162A00A-22A6-44FC-168C-A902B563F5EE}|KASHOP.BLL\\KASHOP.BLL.csproj|solutionrelative:kashop.bll\\services\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7B6752E8-5B2F-C3E7-3BDC-0C17A5436BF2}|KASHOP.DAL\\KASHOP.DAL.csproj|c:\\users\\hp\\desktop\\fullstack course\\bach-end and asp.net\\app1\\kashop\\kashop.dal\\dto\\ordersummaryresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7B6752E8-5B2F-C3E7-3BDC-0C17A5436BF2}|KASHOP.DAL\\KASHOP.DAL.csproj|solutionrelative:kashop.dal\\dto\\ordersummaryresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9162A00A-22A6-44FC-168C-A902B563F5EE}|KASHOP.BLL\\KASHOP.BLL.csproj|c:\\users\\hp\\desktop\\fullstack course\\bach-end and asp.net\\app1\\kashop\\kashop.bll\\services\\iorderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9162A00A-22A6-44FC-168C-A902B563F5EE}|KASHOP.BLL\\KASHOP.BLL.csproj|solutionrelative:kashop.bll\\services\\iorderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7B6752E8-5B2F-C3E7-3BDC-0C17A5436BF2}|KASHOP.DAL\\KASHOP.DAL.csproj|c:\\users\\hp\\desktop\\fullstack course\\bach-end and asp.net\\app1\\kashop\\kashop.dal\\dto\\orderdetailsresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7B6752E8-5B2F-C3E7-3BDC-0C17A5436BF2}|KASHOP.DAL\\KASHOP.DAL.csproj|solutionrelative:kashop.dal\\dto\\orderdetailsresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED7DDF75-51AC-5284-1654-F1949D16CBB2}|KASHOP.PL\\KASHOP.PL.csproj|c:\\users\\hp\\desktop\\fullstack course\\bach-end and asp.net\\app1\\kashop\\kashop.pl\\extensions\\applicationservicesextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED7DDF75-51AC-5284-1654-F1949D16CBB2}|KASHOP.PL\\KASHOP.PL.csproj|solutionrelative:kashop.pl\\extensions\\applicationservicesextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7B6752E8-5B2F-C3E7-3BDC-0C17A5436BF2}|KASHOP.DAL\\KASHOP.DAL.csproj|c:\\users\\hp\\desktop\\fullstack course\\bach-end and asp.net\\app1\\kashop\\kashop.dal\\dto\\changeorderstatusrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7B6752E8-5B2F-C3E7-3BDC-0C17A5436BF2}|KASHOP.DAL\\KASHOP.DAL.csproj|solutionrelative:kashop.dal\\dto\\changeorderstatusrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "OrdersController.cs",
+              "DocumentMoniker": "C:\\Users\\hp\\Desktop\\FullStack course\\Bach-End and ASP.Net\\app1\\KASHOP\\KASHOP.PL\\Controllers\\OrdersController.cs",
+              "RelativeDocumentMoniker": "KASHOP.PL\\Controllers\\OrdersController.cs",
+              "ToolTip": "C:\\Users\\hp\\Desktop\\FullStack course\\Bach-End and ASP.Net\\app1\\KASHOP\\KASHOP.PL\\Controllers\\OrdersController.cs*",
+              "RelativeToolTip": "KASHOP.PL\\Controllers\\OrdersController.cs*",
+              "ViewState": "AgIAAC4AAAAAAAAAAAA0wD4AAABzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-10T15:48:00.907Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "OrderService.cs",
+              "DocumentMoniker": "C:\\Users\\hp\\Desktop\\FullStack course\\Bach-End and ASP.Net\\app1\\KASHOP\\KASHOP.BLL\\Services\\OrderService.cs",
+              "RelativeDocumentMoniker": "KASHOP.BLL\\Services\\OrderService.cs",
+              "ToolTip": "C:\\Users\\hp\\Desktop\\FullStack course\\Bach-End and ASP.Net\\app1\\KASHOP\\KASHOP.BLL\\Services\\OrderService.cs",
+              "RelativeToolTip": "KASHOP.BLL\\Services\\OrderService.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAUwCQAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-10T15:01:29.739Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IOrderService.cs",
+              "DocumentMoniker": "C:\\Users\\hp\\Desktop\\FullStack course\\Bach-End and ASP.Net\\app1\\KASHOP\\KASHOP.BLL\\Services\\IOrderService.cs",
+              "RelativeDocumentMoniker": "KASHOP.BLL\\Services\\IOrderService.cs",
+              "ToolTip": "C:\\Users\\hp\\Desktop\\FullStack course\\Bach-End and ASP.Net\\app1\\KASHOP\\KASHOP.BLL\\Services\\IOrderService.cs",
+              "RelativeToolTip": "KASHOP.BLL\\Services\\IOrderService.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAADwvw4AAABSAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-10T15:01:28.985Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "OrderSummaryResponse.cs",
+              "DocumentMoniker": "C:\\Users\\hp\\Desktop\\FullStack course\\Bach-End and ASP.Net\\app1\\KASHOP\\KASHOP.DAL\\Dto\\OrderSummaryResponse.cs",
+              "RelativeDocumentMoniker": "KASHOP.DAL\\Dto\\OrderSummaryResponse.cs",
+              "ToolTip": "C:\\Users\\hp\\Desktop\\FullStack course\\Bach-End and ASP.Net\\app1\\KASHOP\\KASHOP.DAL\\Dto\\OrderSummaryResponse.cs",
+              "RelativeToolTip": "KASHOP.DAL\\Dto\\OrderSummaryResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-10T15:21:20.32Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "OrderDetailsResponse.cs",
+              "DocumentMoniker": "C:\\Users\\hp\\Desktop\\FullStack course\\Bach-End and ASP.Net\\app1\\KASHOP\\KASHOP.DAL\\Dto\\OrderDetailsResponse.cs",
+              "RelativeDocumentMoniker": "KASHOP.DAL\\Dto\\OrderDetailsResponse.cs",
+              "ToolTip": "C:\\Users\\hp\\Desktop\\FullStack course\\Bach-End and ASP.Net\\app1\\KASHOP\\KASHOP.DAL\\Dto\\OrderDetailsResponse.cs",
+              "RelativeToolTip": "KASHOP.DAL\\Dto\\OrderDetailsResponse.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAA5wA0AAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-10T15:26:07.353Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ApplicationServicesExtensions.cs",
+              "DocumentMoniker": "C:\\Users\\hp\\Desktop\\FullStack course\\Bach-End and ASP.Net\\app1\\KASHOP\\KASHOP.PL\\Extensions\\ApplicationServicesExtensions.cs",
+              "RelativeDocumentMoniker": "KASHOP.PL\\Extensions\\ApplicationServicesExtensions.cs",
+              "ToolTip": "C:\\Users\\hp\\Desktop\\FullStack course\\Bach-End and ASP.Net\\app1\\KASHOP\\KASHOP.PL\\Extensions\\ApplicationServicesExtensions.cs",
+              "RelativeToolTip": "KASHOP.PL\\Extensions\\ApplicationServicesExtensions.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABwAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-10T15:49:26.435Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ChangeOrderStatusRequest.cs",
+              "DocumentMoniker": "C:\\Users\\hp\\Desktop\\FullStack course\\Bach-End and ASP.Net\\app1\\KASHOP\\KASHOP.DAL\\Dto\\ChangeOrderStatusRequest.cs",
+              "RelativeDocumentMoniker": "KASHOP.DAL\\Dto\\ChangeOrderStatusRequest.cs",
+              "ToolTip": "C:\\Users\\hp\\Desktop\\FullStack course\\Bach-End and ASP.Net\\app1\\KASHOP\\KASHOP.DAL\\Dto\\ChangeOrderStatusRequest.cs",
+              "RelativeToolTip": "KASHOP.DAL\\Dto\\ChangeOrderStatusRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-10T15:29:03.974Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
