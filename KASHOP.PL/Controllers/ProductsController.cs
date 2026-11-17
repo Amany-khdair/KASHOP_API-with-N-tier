@@ -24,9 +24,9 @@ namespace KASHOP.PL.Controllers
             return result.Success ? Ok(result) : BadRequest(result);
         }
         [HttpGet("")]
-        public async Task <IActionResult> GetAll()
+        public async Task <IActionResult> GetAll([FromQuery] ProductQueryRequest request)
         {
-            var result = await _productService.GetAllProducts();
+            var result = await _productService.GetAllProducts(request);
             return result.Success ? Ok(result) : BadRequest(result);
         }
         [HttpGet("{id}")]

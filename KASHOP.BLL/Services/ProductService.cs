@@ -1,9 +1,11 @@
-﻿using KASHOP.DAL.Dto;
+﻿using KASHOP.BLL.Extensions;
+using KASHOP.DAL.Dto;
 using KASHOP.DAL.Models;
 using KASHOP.DAL.Repository;
 using Mapster;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -43,12 +45,55 @@ namespace KASHOP.BLL.Services
                                  
         }       
 
-        public async Task<Result<List<ProductResponse>>> GetAllProducts()
+        public async Task<Result<PaginationResponse<ProductResponse>>> GetAllProducts(ProductQueryRequest request)
         {           
-            var products = await _unitOfWork.ProductRepository.GetAllAsync(
+            var query = _unitOfWork.ProductRepository.GetQueryable(
                 includes: new string[] { nameof(Product.Translations), nameof(Product.Category) });
 
-            return Result<List<ProductResponse>>.Ok(products.Adapt<List<ProductResponse>>(), "Products retrieved successfully");                           
+            if (!string.IsNullOrWhiteSpace(request.Search))
+            {
+                query = query.Where(p => p.Translations.Any(t => t.Name.Contains(request.Search)));
+            }
+            
+            if (request.CategoryId.HasValue)
+            {
+                query = query.Where(p => p.CategoryId == request.CategoryId);
+            }
+
+            if (request.MinPrice.HasValue)
+            {
+                query = query.Where(p => p.Price >= request.MinPrice);
+            }
+
+            if (request.MaxPrice.HasValue)
+            {
+                query = query.Where(p => p.Price <= request.MaxPrice);
+            }
+
+            var sortBy = request.sortBy?.ToLower();
+            var language = CultureInfo.CurrentCulture.Name;
+
+            if(sortBy == "price")
+            {
+                query = request.Descending ? query.OrderByDescending(p=>p.Price)
+                    : query.OrderBy(p => p.Price);
+            }else if(sortBy == "rate")
+            {
+                query = request.Descending ? query.OrderByDescending(p=>p.Rate)
+                    : query.OrderBy(p => p.Rate);            
+            } else if(sortBy == "name")
+            {
+                query = request.Descending ? query.OrderByDescending(p=>p.Translations.Where(t=>t.Language == language).Select(t=>t.Name).FirstOrDefault())
+                    : query.OrderBy(p => p.Translations.Where(t=>t.Language == language).Select(t=>t.Name).FirstOrDefault());
+            }
+            else
+            {
+                query = request.Descending ? query.OrderByDescending(p => p.Id)
+                    : query.OrderBy(p => p.Id);
+            }
+
+            var result = await query.ToPaginationAsync(request.Page, request.Limit);
+            return Result<PaginationResponse<ProductResponse>>.Ok(result.Adapt<PaginationResponse<ProductResponse>>(), "Products retrieved successfully");                           
         }
 
         public async Task<Result<ProductResponse>> GetProduct(Expression<Func<Product, bool>> filter)

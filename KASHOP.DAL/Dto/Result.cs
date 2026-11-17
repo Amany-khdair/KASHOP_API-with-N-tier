@@ -49,5 +49,10 @@ namespace KASHOP.DAL.Dto
                 Errors = errors
             };
         }
+
+        public static Result<ProductResponse> Ok(List<ProductResponse> productResponses, string v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

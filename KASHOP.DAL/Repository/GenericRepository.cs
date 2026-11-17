@@ -24,6 +24,23 @@ namespace KASHOP.DAL.Repository
             return entity;
         }
 
+        public IQueryable<T> GetQueryable(Expression<Func<T, bool>>? filter = null, string[]? includes = null)
+        {
+            IQueryable<T> query = _context.Set<T>();
+            if (includes != null)
+            {
+                foreach (var include in includes)
+                {
+                    query = query.Include(include);
+                }
+            }
+            if (filter is not null)
+            {
+                query = query.Where(filter);
+            }
+            return query;
+        }
+
         public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>> ? filter = null, string[]? includes = null)
         {
             IQueryable<T> query = _context.Set<T>();
